@@ -1,3 +1,5 @@
 requests
 scrapy
 service_identity
+pymongo
+scrapy-mongodb
