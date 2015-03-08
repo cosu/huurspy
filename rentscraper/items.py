@@ -18,4 +18,5 @@ class AdvertisedItem(Item):
     source = Field()
     type = Field()
     postcode = Field()
+    base_address = Field()
 

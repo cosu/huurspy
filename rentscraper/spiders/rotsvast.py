@@ -43,9 +43,14 @@ class RotsvastLoader(ItemLoader):
 
 
 class RotsvastSpider(CrawlSpider):
-    name, start_urls = 'rotsvast', ['http://www.rotsvast.nl/nl/zoeken/rotterdam']
+    name, start_urls = 'rotsvast', ['http://www.rotsvast.nl/nl/zoeken/']
     rules = (
-    Rule(SgmlLinkExtractor(allow=('http://www.rotsvast.nl/nl/huuraanbod/page-')), callback='parse_page', follow=True),)
+        Rule(SgmlLinkExtractor(allow=('http://www.rotsvast.nl/nl/huuraanbod/page-')), callback='parse_page',
+             follow=True),)
+
+    def __init__(self, city=None, *args, **kwargs):
+        super(RotsvastSpider, self).__init__(*args, **kwargs)
+        self.start_urls[0] = self.start_urls[0]+city
 
     def parse_page(self, response):
         selector = Selector(response)
@@ -62,5 +67,9 @@ class RotsvastSpider(CrawlSpider):
             l.add_xpath("postcode", ".//p[1]")
             l.add_xpath("surface", ".//p[3]")
             l.add_xpath("rooms", ".//p[3]")
+            l.add_value("base_address", response.url)
 
             yield l.load_item()
+
+    # this is to alo parse the start page. There might be a better way I guess.
+    parse_start_url = parse_page

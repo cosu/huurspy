@@ -24,7 +24,10 @@ class JacobusSpider(CrawlSpider):
     name, start_urls = 'jacobus', ['http://jacobusrecourt.nl/MenuID/3566/Woning/Verhuur/Chapter/Huurwoningen/']
     rules = (Rule(SgmlLinkExtractor(allow=('Huurwoningen/Verhuur/1/Pagina/')), callback='parse_page', follow=True),)
 
+
+
     def parse_page(self, response):
+
         selector = Selector(response)
         for listed_ad in selector.xpath("//div[@class='woning']"):
             l = JacobusLoader(item=AdvertisedItem(), selector=listed_ad)
@@ -36,6 +39,10 @@ class JacobusSpider(CrawlSpider):
             l.add_xpath("availability", ".//div[@class='beschikbaarper']//span")
             l.add_xpath("rooms", ".//div[@class='slaapkamers']//span")
             l.add_xpath("type", ".//div[@class='soortobject']//span")
+            l.add_value("base_address", response.url)
             l.add_value("source", self.name)
 
             yield l.load_item()
+
+    # this is to alo parse the start page. There might be a better way I guess.
+    parse_start_url = parse_page

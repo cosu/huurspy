@@ -1,28 +1,44 @@
-import pymongo
-
+from urllib import  quote
+from pymongo import ReadPreference
+from pymongo.mongo_client import MongoClient
 from scrapy.conf import settings
-from scrapy.exceptions import DropItem
 from scrapy import log
+from pushbullet import Pushbullet
+import urlparse
 
 
-class MongoDBPipeline(object):
+class PushbulletPipeline(object):
+
     def __init__(self):
-        connection = pymongo.Connection(
-            settings['MONGODB_SERVER'],
-            settings['MONGODB_PORT']
-        )
-        db = connection[settings['MONGODB_DB']]
+        self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
+        self.ads_to_send = []
+
+        connection = MongoClient(
+            settings['MONGODB_HOST'],
+            read_preference=ReadPreference.PRIMARY)
+
+        db = connection[settings['MONGODB_DATABASE']]
         self.collection = db[settings['MONGODB_COLLECTION']]
 
-
     def process_item(self, item, spider):
-        valid = True
-        for data in item:
-            if not data:
-                valid = False
-                raise DropItem("Missing {0}!".format(data))
-        if valid:
-            self.collection.insert(dict(item))
-            log.msg("Question added to MongoDB database!",
-                    level=log.DEBUG, spider=spider)
+        if int(item['price']) < settings['MAX_PRICE'] and item['place'].lower() in settings['PLACES']:
+
+            # the item is not in mongo
+            if self.collection.find({"link": item['link']}).count() == 0:
+                self.debug(spider, item['link'])
+                self.ads_to_send.append(item)
         return item
+
+    def close_spider(self, spider):
+        links = []
+        for item in self.ads_to_send:
+            log.msg(" %s " % item['link'], level=log.DEBUG, spider=spider)
+            links.append(urlparse.urljoin(item['base_address'], quote(item['link'])))
+            log.msg(" %s " % item, level=log.DEBUG, spider=spider)
+
+        if len(links):
+            self.pb.push_note("New ads", "\n".join(links))
+
+    def debug(self, spider, msg):
+        log.msg(msg, level=log.DEBUG, spider=spider)
+
