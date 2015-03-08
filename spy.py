@@ -41,7 +41,7 @@ class JacobusSpider(Spider):
             l.add_xpath("link", ".//a[@class='detaillink']/@href")
             l.add_xpath("price", ".//span[@class='prijs right']", re="(\d+\.*\d+)")
             l.add_xpath("place", ".//span[@class='plaats']")
-            l.add_xpath("street", ".//span[@class='straat']")
+            l.add_xpath("street", ".//span[@class='straat']", re="(([A-Za-z]+\s*)+\d+)")
 
             yield l.load_item()
 
