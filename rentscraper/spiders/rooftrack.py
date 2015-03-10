@@ -23,7 +23,7 @@ def _clean_description(text):
     if len(clean) == 4:
         result["rooms"] = clean[1]
         result["type"] = clean[0]
-        result["type"] = clean[-1]
+        result["surface"] = clean[-1]
 
     if len(clean) == 2:
         result['surface'] = clean[1]
@@ -31,7 +31,7 @@ def _clean_description(text):
     if len(clean) != 2 and len(clean) != 4:
         result["rooms"] = str(clean)
         result["type"] = clean
-        result["type"] = clean
+        result["surface"] = clean
 
     return result
 
@@ -42,14 +42,16 @@ def _extract_price(text):
 
 def _extract_place(text):
     tokens = text.split("-")
-    if len(tokens) == 2:
-        return tokens[0]
+
+    return tokens[0]
 
 
 def _extract_hood(text):
     tokens = text.split("-")
-    if len(tokens) == 2:
-        return tokens[1]
+
+    return "-".join(tokens[1:])
+
+
 
 
 def _extract_rooms(text):
