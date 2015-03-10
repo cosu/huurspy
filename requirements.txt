@@ -4,3 +4,4 @@ service_identity
 pymongo
 scrapy-mongodb
 pushbullet.py
+twisted
