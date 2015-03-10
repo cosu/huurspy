@@ -37,19 +37,17 @@ def _clean_description(text):
 
 
 def _extract_price(text):
-    return text.split(" ")[1].split(",")[0]
+    return text.split(" ")[1].split(",")[0].strip()
 
 
 def _extract_place(text):
     tokens = text.split("-")
-
-    return tokens[0]
+    return tokens[0].strip()
 
 
 def _extract_hood(text):
     tokens = text.split("-")
-
-    return "-".join(tokens[1:])
+    return "-".join(tokens[1:]).strip()
 
 
 
