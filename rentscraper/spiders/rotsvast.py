@@ -11,39 +11,42 @@ from rentscraper.util import has_pp
 __author__ = 'cdumitru'
 
 
-def _extract_street_from_description(description):
+def _extract_street(description):
     return description.split(",")[1].strip()
 
 
-def _extract_place_from_description(description):
+def _extract_place(description):
     return description.split(",")[2].strip()
 
 
-def _extract_type_from_description(description):
+def _extract_type(description):
     return description.split(",")[0].strip()
 
 
-def _extract_surface_from_description(description):
+def _extract_surface(description):
     return description.split("-")[0].split(":")[1]
 
 
-def _extract_rooms_from_description(description):
+def _extract_rooms(description):
     return description.split("-")[1].split()[0]
 
 
 class RotsvastLoader(ItemLoader):
     default_input_processor = MapCompose(remove_tags, unicode.strip)
     default_output_processor = TakeFirst()
-    price_in = MapCompose(remove_dot, default_input_processor)
-    parking_in = MapCompose(has_pp, default_input_processor)
-    street_in = MapCompose(_extract_street_from_description, default_input_processor)
-    place_in = MapCompose(_extract_place_from_description, default_input_processor)
-    rooms_in = MapCompose(_extract_rooms_from_description, default_input_processor)
-    surface_in = MapCompose(_extract_surface_from_description, default_input_processor)
+    price_in = MapCompose(default_input_processor, remove_dot)
+    parking_in = MapCompose(default_input_processor, has_pp)
+    street_in = MapCompose(default_input_processor, _extract_street)
+    place_in = MapCompose(default_input_processor, _extract_place)
+    rooms_in = MapCompose(default_input_processor, _extract_rooms)
+    surface_in = MapCompose(default_input_processor, _extract_surface)
 
 
 class RotsvastSpider(CrawlSpider):
-    name, start_urls = 'rotsvast', ['http://www.rotsvast.nl/nl/zoeken/']
+    name = 'rotsvast'
+
+    allowed_domains = ["rotsvast.nl"]
+    start_urls = ['http://www.rotsvast.nl/nl/zoeken/']
     rules = (
         Rule(SgmlLinkExtractor(allow=('http://www.rotsvast.nl/nl/huuraanbod/page-')), callback='parse_page',
              follow=True),)

@@ -16,18 +16,17 @@ __author__ = 'cosmin'
 class JacobusLoader(ItemLoader):
     default_input_processor = MapCompose(remove_tags, unicode.strip)
     default_output_processor = TakeFirst()
-    price_in = MapCompose(remove_dot, default_input_processor)
-    parking_in = MapCompose(has_pp, default_input_processor)
+    price_in = MapCompose(default_input_processor, remove_dot)
+    parking_in = MapCompose(default_input_processor, has_pp)
 
 
 class JacobusSpider(CrawlSpider):
-    name, start_urls = 'jacobus', ['http://jacobusrecourt.nl/MenuID/3566/Woning/Verhuur/Chapter/Huurwoningen/']
+    name = 'jacobus'
+    start_urls = ['http://jacobusrecourt.nl/MenuID/3566/Woning/Verhuur/Chapter/Huurwoningen/']
+    allowed_domains = ["jacobusrecourt.nl"]
     rules = (Rule(SgmlLinkExtractor(allow=('Huurwoningen/Verhuur/1/Pagina/')), callback='parse_page', follow=True),)
 
-
-
     def parse_page(self, response):
-
         selector = Selector(response)
         for listed_ad in selector.xpath("//div[@class='woning']"):
             l = JacobusLoader(item=AdvertisedItem(), selector=listed_ad)
@@ -44,5 +43,5 @@ class JacobusSpider(CrawlSpider):
 
             yield l.load_item()
 
-    # this is to alo parse the start page. There might be a better way I guess.
+    # this is to also parse the start page. There might be a better way I guess.
     parse_start_url = parse_page

@@ -19,4 +19,6 @@ class AdvertisedItem(Item):
     type = Field()
     base_address = Field()
     age = Field()
+    hood = Field()
+
 

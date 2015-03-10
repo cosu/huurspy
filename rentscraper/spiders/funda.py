@@ -1,4 +1,4 @@
-from scrapy import Spider, Selector
+from scrapy import Selector
 from scrapy.contrib.linkextractors.lxmlhtml import LxmlLinkExtractor
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import MapCompose, TakeFirst
@@ -110,7 +110,6 @@ class FundaSpider(CrawlSpider):
             l.add_xpath("rooms", ".//li[2]")
             l.add_xpath("age", ".//li[2]")
             l.add_xpath("availability", ".//li[2]")
-
 
             yield l.load_item()
 

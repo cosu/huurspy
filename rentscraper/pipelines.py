@@ -1,14 +1,21 @@
-from urllib import  quote
+from urllib import quote
 from pymongo import ReadPreference
 from pymongo.mongo_client import MongoClient
 from scrapy.conf import settings
 from scrapy import log
 from pushbullet import Pushbullet
 import urlparse
+from scrapy.exceptions import DropItem
 
+
+class InvalidItemPipeline(object):
+    def process_item(self, item, spider):
+        if 'price' not in item.keys():
+            raise DropItem("Invalid item found: %s" % item)
+        else:
+            return item
 
 class PushbulletPipeline(object):
-
     def __init__(self):
         if settings[settings['PUSHBULLET_KEY']]:
             self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
