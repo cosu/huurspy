@@ -19,7 +19,7 @@ class InvalidItemPipeline(object):
 class PushbulletPipeline(object):
     use_pushbullet = False
     def __init__(self):
-        if settings[settings['PUSHBULLET_KEY']]:
+        if settings['PUSHBULLET_KEY']:
             log.msg("Pushbullet enabled", level=log.INFO)
             self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
             self.use_pushbullet = True
