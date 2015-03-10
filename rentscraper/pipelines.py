@@ -10,19 +10,21 @@ from scrapy.exceptions import DropItem
 
 class InvalidItemPipeline(object):
     def process_item(self, item, spider):
-        if 'price' not in item.keys():
+        if 'price' not in item.keys() or 'place' not in item.keys():
             raise DropItem("Invalid item found: %s" % item)
         else:
             return item
 
 
 class PushbulletPipeline(object):
+    use_pushbullet = False
     def __init__(self):
         if settings[settings['PUSHBULLET_KEY']]:
-            log.msg("Pushbullet enabled", level=log.DEBUG)
+            log.msg("Pushbullet enabled", level=log.INFO)
             self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
+            self.use_pushbullet = True
         else:
-            log.msg("Pushbullet key missing", level=log.DEBUG)
+            log.msg("Pushbullet key missing", level=log.INFO)
         self.ads_to_send = []
 
         connection = MongoClient(
@@ -34,7 +36,6 @@ class PushbulletPipeline(object):
 
     def process_item(self, item, spider):
         if int(item['price']) < settings['MAX_PRICE'] and item['place'].lower() in settings['PLACES']:
-
             # the item is not in mongo
             if self.collection.find({"link": item['link']}).count() == 0:
                 self.debug(spider, item['link'])
@@ -44,11 +45,12 @@ class PushbulletPipeline(object):
     def close_spider(self, spider):
         links = []
         for item in self.ads_to_send:
-            log.msg(" %s " % item['link'], level=log.DEBUG, spider=spider)
+            log.msg("[NEW] link:  %s " % item['link'], level=log.INFO, spider=spider)
             links.append(urlparse.urljoin(item['base_address'], quote(item['link'])))
-            log.msg(" %s " % item, level=log.DEBUG, spider=spider)
+            log.msg("[NEW] item %s " % item, level=log.INFO, spider=spider)
 
-        if len(links) and self.pb:
+        if len(links) and self.use_pushbullet:
+            log.msg("Sending %d new items " % len(item), level=log.INFO, spider=spider)
             self.pb.push_note("New ads", "\n".join(links))
 
     def debug(self, spider, msg):

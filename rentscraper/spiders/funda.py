@@ -16,7 +16,8 @@ __author__ = 'cdumitru'
 def _clean(description):
     result = {
         'age': None,
-        'rooms': None
+        'rooms': None,
+        'surface': None
     }
     clean = sub(r'[^\x00-\x7F]+', ',', description)
     clean = sub('\s+', ' ', clean)
@@ -34,15 +35,19 @@ def _clean(description):
     if "m" in clean[0]:
         result['surface'] = clean[0]
 
-    if "kamers" in clean[2]:
-        result['rooms'] = clean[2].split()[0]
+    if len(clean)> 2:
+        if "kamers" in clean[2]:
+            result['rooms'] = clean[2].split()[0]
 
 
     return result
 
 def _extract_place(description):
     tokens = sub('\s+', ',', description.strip()).strip().split(",")
-    return tokens[2]
+    if (len(tokens)) > 2:
+        return tokens[2]
+    else:
+        return str(tokens)
 
 
 def _extract_postcode(description):
