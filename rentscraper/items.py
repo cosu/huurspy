@@ -17,6 +17,6 @@ class AdvertisedItem(Item):
     furnished = Field()
     source = Field()
     type = Field()
-    postcode = Field()
     base_address = Field()
+    age = Field()
 

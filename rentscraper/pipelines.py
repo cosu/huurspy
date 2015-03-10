@@ -10,7 +10,8 @@ import urlparse
 class PushbulletPipeline(object):
 
     def __init__(self):
-        self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
+        if settings[settings['PUSHBULLET_KEY']]:
+            self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
         self.ads_to_send = []
 
         connection = MongoClient(
@@ -36,7 +37,7 @@ class PushbulletPipeline(object):
             links.append(urlparse.urljoin(item['base_address'], quote(item['link'])))
             log.msg(" %s " % item, level=log.DEBUG, spider=spider)
 
-        if len(links):
+        if len(links) and self.pb:
             self.pb.push_note("New ads", "\n".join(links))
 
     def debug(self, spider, msg):
