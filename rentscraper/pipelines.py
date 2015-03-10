@@ -18,8 +18,12 @@ class InvalidItemPipeline(object):
 class PushbulletPipeline(object):
     def __init__(self):
         if settings[settings['PUSHBULLET_KEY']]:
+            self.debug("Pushbullet enabled")
             self.pb = Pushbullet(settings['PUSHBULLET_KEY'])
+        else:
+            self.debug("Pushbullet key missing")
         self.ads_to_send = []
+
 
         connection = MongoClient(
             settings['MONGODB_HOST'],
