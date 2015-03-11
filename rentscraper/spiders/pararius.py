@@ -23,7 +23,7 @@ def parse_location(text):
 
     tokens = [t.strip() for t in tokens]
 
-    if len(tokens) == 3:
+    if len(tokens) >= 3:
         result['place'] = tokens[1]
         result['hood'] = tokens[2]
 
