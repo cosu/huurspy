@@ -50,8 +50,6 @@ def _extract_hood(text):
     return "-".join(tokens[1:]).strip()
 
 
-
-
 def _extract_rooms(text):
     return _clean_description(text)['rooms']
 
