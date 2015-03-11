@@ -1,6 +1,8 @@
 huurspy
 =
 
+Scrapes rental websites , saves all the results into mongo and sends the interesting ones to your pushbullet enabled device. 
+
 
 * For ubuntu 14.04 you will need to install:
 `` apt-get install python-dev libxml2-dev libxslt-dev zlib1g-dev libffi-dev libssl-dev python-pip  python-virtualenv virtualenvwrapper``
