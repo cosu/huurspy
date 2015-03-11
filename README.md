@@ -50,3 +50,4 @@ Todo
 * Make the city a parameter for each scraper so we can iterate over a city list
 * Better result filtering
 * Better mongodb logic
+ 
