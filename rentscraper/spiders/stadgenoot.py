@@ -13,9 +13,7 @@ class StadgenootLoader(ItemLoader):
     default_input_processor = MapCompose(remove_tags, unicode.strip, collapse_whitespace)
     default_output_processor = TakeFirst()
     price_in = MapCompose(default_input_processor, remove_dot)
-    place_in = MapCompose(default_input_processor, lambda x: search('\d{4} \w{2} (\w+) \(.*\)', x).group(1))
     hood_in = MapCompose(default_input_processor, lambda x: sub("[\(\)]", '', x))
-    # street_in = MapCompose(default_input_processor, _extract_street)
 
 
 class StadgenootSpider(Spider):
