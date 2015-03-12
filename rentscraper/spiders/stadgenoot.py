@@ -1,28 +1,19 @@
-from re import sub
+from re import sub, search
 from scrapy import Spider, Selector
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import MapCompose
 from scrapy.contrib.loader.processor import TakeFirst
 from w3lib.html import remove_tags
 from rentscraper.items import AdvertisedItem
-from rentscraper.util import remove_dot
+from rentscraper.util import remove_dot, collapse_whitespace
 
-
-def _extract_place(text):
-    clean = sub('\s+', ' ', text)
-    return clean.split()[2]
-
-
-# def _extract_hood(text):
-#     clean = sub('\s+', ' ', text)
-#     reeturn clean.split()[2]
 
 
 class StadgenootLoader(ItemLoader):
-    default_input_processor = MapCompose(remove_tags, unicode.strip)
+    default_input_processor = MapCompose(remove_tags, unicode.strip, collapse_whitespace)
     default_output_processor = TakeFirst()
     price_in = MapCompose(default_input_processor, remove_dot)
-    place_in = MapCompose(default_input_processor, _extract_place)
+    place_in = MapCompose(default_input_processor, lambda x: search('\d{4} \w{2} (\w+) \(.*\)', x).group(1))
     hood_in = MapCompose(default_input_processor, lambda x: sub("[\(\)]", '', x))
     # street_in = MapCompose(default_input_processor, _extract_street)
 
