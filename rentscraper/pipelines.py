@@ -35,7 +35,7 @@ class PushbulletPipeline(object):
         self.collection = db[settings['MONGODB_COLLECTION']]
 
     def process_item(self, item, spider):
-        if int(item['price']) < settings['MAX_PRICE'] and item['place'].lower() in settings['PLACES']:
+        if int(item['price']) <= settings['MAX_PRICE'] and item['place'].lower() in settings['PLACES']:
             # the item is not in mongo
             if self.collection.find({"link": item['link']}).count() == 0:
                 self.debug(spider, item['link'])
