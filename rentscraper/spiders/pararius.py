@@ -22,6 +22,9 @@ def parse_location(text):
     tokens = text.split("-")
 
     tokens = [t.strip() for t in tokens]
+    if len(tokens) == 2:
+        result['street'] = tokens[0]
+        result['place'] = tokens[1]
 
     if len(tokens) >= 3:
         result['place'] = tokens[1]
@@ -97,7 +100,11 @@ class ParariusSpider(CrawlSpider):
         selector = Selector(response)
 
         for listed_ad in selector.css(".hproduct"):
+            if len(listed_ad.xpath(".//script")) > 0 or len(listed_ad.css(".push-event")):
+                # this skips all the fake ads
+                continue
             l = ParariusLoader(item=AdvertisedItem(), selector=listed_ad)
+
 
             l.add_css("link", ".photo::attr(href)")
             l.add_xpath("place", './/div[@class="addressTitle"]/a/text()')
@@ -106,6 +113,7 @@ class ParariusSpider(CrawlSpider):
             l.add_xpath("price", './/strong[@class="price"]/b')
             l.add_value("base_address", response.url)
             l.add_value("source", self.name)
+            l.add_value("html", listed_ad.extract())
 
             yield l.load_item()
 

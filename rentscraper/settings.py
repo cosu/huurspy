@@ -17,6 +17,7 @@ MONGODB_ADD_TIMESTAMP = True
 MONGODB_URI = 'mongodb://localhost:27017'
 MONGODB_DATABASE = 'scrapy'
 MONGODB_COLLECTION = 'rentscraper'
+MONGODB_COLLECTION_INVALID = 'rentscraper_invalid'
 MAX_PRICE = 1100
 PLACES = ['amsterdam', 'amstelveen']
 

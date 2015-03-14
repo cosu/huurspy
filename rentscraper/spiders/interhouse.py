@@ -18,12 +18,11 @@ class InterhouseLoader(ItemLoader):
     default_output_processor = TakeFirst()
     price_in = MapCompose(default_input_processor, remove_dot)
     place_in = MapCompose(default_input_processor, _extract_place)
-    # hood_in = MapCompose(default_input_processor, _extract_hood)
-    # street_in = MapCompose(default_input_processor, _extract_street)
+
 
 class InterhouseSpider(Spider):
     name = "interhouse"
-    allowed_domains = ["http://www.interhouse.nl"]
+    allowed_domains = ["www.interhouse.nl"]
     start_urls = (
         'http://amsterdam.interhouse.nl/nl/woningaanbod',
     )
@@ -41,5 +40,7 @@ class InterhouseSpider(Spider):
             l.add_xpath("price", './/td[@class="bold"]', re="(\d+\.*\d+)")
             l.add_value("base_address", response.url)
             l.add_value("source", self.name)
+            l.add_value("html", listed_ad.extract())
+
 
             yield l.load_item()

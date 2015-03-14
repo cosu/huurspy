@@ -101,6 +101,8 @@ class RooftrackSpider(CrawlSpider):
             l.add_css("link", ".react::attr(href)")
             l.add_value("base_address", response.url)
             l.add_value("source", self.name)
+            l.add_value("html", listed_ad.extract())
+
 
             yield l.load_item()
 

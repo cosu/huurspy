@@ -71,6 +71,8 @@ class RotsvastSpider(CrawlSpider):
             l.add_xpath("surface", ".//p[3]")
             l.add_xpath("rooms", ".//p[3]")
             l.add_value("base_address", response.url)
+            l.add_value("html", listed_ad.extract())
+
 
             yield l.load_item()
 

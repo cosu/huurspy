@@ -1,4 +1,5 @@
 from urllib import quote
+import datetime
 from pymongo import ReadPreference
 from pymongo.mongo_client import MongoClient
 from scrapy.conf import settings
@@ -6,18 +7,39 @@ from scrapy import log
 from pushbullet import Pushbullet
 import urlparse
 from scrapy.exceptions import DropItem
+from scrapy.contrib.exporter import BaseItemExporter
 
 
-class InvalidItemPipeline(object):
+class InvalidItemPipeline(BaseItemExporter):
+    def __init__(self):
+        super(InvalidItemPipeline, self).__init__()
+
+        connection = MongoClient(
+            settings['MONGODB_HOST'],
+            read_preference=ReadPreference.PRIMARY)
+        db = connection[settings['MONGODB_DATABASE']]
+        self.collection = db[settings['MONGODB_COLLECTION_INVALID']]
+
     def process_item(self, item, spider):
-        if 'price' not in item.keys() or 'place' not in item.keys():
-            raise DropItem("Invalid item found: %s" % item)
+        dict_item = dict(self._get_serialized_fields(item))
+        keys = item.keys()
+        if 'price' not in keys or 'place' not in keys or 'link' not in keys:
+
+            dict_item['rentscraper'] = {'ts': datetime.datetime.utcnow()}
+            dict_item['url'] = item.get_url()
+
+            if self.collection.find({"url": dict_item['url']}).count() == 0:
+                self.collection.insert(dict_item)
+
+            raise DropItem("Invalid item (missing price or place) %s" % item)
         else:
+            dict_item.pop("html", None)
             return item
 
 
 class PushbulletPipeline(object):
     use_pushbullet = False
+
     def __init__(self):
         if settings['PUSHBULLET_KEY']:
             log.msg("Pushbullet enabled", level=log.INFO)
@@ -46,7 +68,7 @@ class PushbulletPipeline(object):
         links = []
         for item in self.ads_to_send:
             log.msg("[NEW] link:  %s " % item['link'], level=log.INFO, spider=spider)
-            links.append(urlparse.urljoin(item['base_address'], quote(item['link'])))
+            links.append(item.get_url())
             log.msg("[NEW] item %s " % item, level=log.INFO, spider=spider)
 
         if len(links) and self.use_pushbullet:

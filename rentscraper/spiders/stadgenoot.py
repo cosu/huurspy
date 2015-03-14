@@ -40,6 +40,8 @@ class StadgenootSpider(Spider):
             l.add_xpath("rooms", './/li[2]', re="(\d+).*kamer")
             l.add_value("base_address", response.url)
             l.add_value("source", self.name)
+            l.add_value("html", listed_ad.extract())
+
 
             yield l.load_item()
 

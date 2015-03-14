@@ -115,6 +115,8 @@ class FundaSpider(CrawlSpider):
             l.add_xpath("rooms", ".//li[2]")
             l.add_xpath("age", ".//li[2]")
             l.add_xpath("availability", ".//li[2]")
+            l.add_value("html", listed_ad.extract())
+
 
             yield l.load_item()
 

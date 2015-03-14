@@ -42,6 +42,8 @@ class HousingnetSpider(CrawlSpider):
             l.add_value("base_address", "")
             l.add_value("source", self.name)
             l.add_css("link", "::attr(onclick)", re="='(.+)'")
+            l.add_value("html", listed_ad.extract())
+
 
             yield l.load_item()
 
