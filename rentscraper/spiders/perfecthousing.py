@@ -40,7 +40,7 @@ class PerfecthousingSpider(CrawlSpider):
             l.add_xpath("price", ".//td[1]/strong", re="(\d+\.*\d+)")
             l.add_xpath("street", ".//h3/a/text()", re="(.*),")
             l.add_xpath("place", ".//h3/a/text()")
-            l.add_value("base_address", "")
+            l.add_value("base_address", response.url)
             l.add_value("source", self.name)
             l.add_xpath("link", ".//h3/a/@href")
             l.add_xpath("hood", ".//h3/a/text()", re=",(.+),")
