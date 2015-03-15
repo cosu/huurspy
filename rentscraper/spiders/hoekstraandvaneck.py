@@ -1,5 +1,6 @@
 from scrapy import Selector
 from scrapy.contrib.linkextractors.lxmlhtml import LxmlLinkExtractor
+from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import MapCompose, TakeFirst
 from scrapy.contrib.spiders import CrawlSpider, Rule
@@ -23,8 +24,8 @@ class HoekstraenvaneckSpider(CrawlSpider):
     )
 
     rules = (
-        Rule(LxmlLinkExtractor(allow=('http://hoekstraenvaneck.nl/MenuID/2890/Woning/Verhuur/Pagina',),
-                               restrict_xpaths=('//div[@id="Main_ctl00_PageNumbers"]'),
+        Rule(SgmlLinkExtractor(allow=(r'Woning/MenuID/2890/Verhuur/1/Pagina/',),
+                               restrict_xpaths=('//span[@id="Main_ctl00_PageNumbers"]'),
                                ),
              callback='parse_page',
              follow=True),
