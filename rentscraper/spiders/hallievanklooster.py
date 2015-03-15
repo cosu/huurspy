@@ -4,7 +4,6 @@ from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import MapCompose, TakeFirst
 from w3lib.html import remove_tags
 from rentscraper.items import AdvertisedItem
-from scrapy import log
 from rentscraper.util import remove_dot
 
 
@@ -18,6 +17,7 @@ class HallievankloosterSpider(Spider):
     allowed_domains = ["www.hallie-vanklooster.nl"]
     start_urls = (
         'http://www.hallie-vanklooster.nl/huizen/smartselect.aspx?prefilter=Huuraanbod',
+        'http://www.hallie-vanklooster.nl/huizen/smartselect.aspx?prefilter=Huuraanbod&pageNum=1'
     )
 
 
