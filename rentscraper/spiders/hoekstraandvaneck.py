@@ -18,7 +18,7 @@ class HoekstraenvaneckSpider(CrawlSpider):
     name = "hoekstraenvaneck"
     allowed_domains = ["hoekstraenvaneck.nl"]
 
-    start_urls = (hoekstraenvaneck
+    start_urls = (
         'http://hoekstraenvaneck.nl/MenuID/2890/Woning/Verhuur/',
     )
 
