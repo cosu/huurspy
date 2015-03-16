@@ -89,6 +89,7 @@ class FundaLoader(ItemLoader):
 
 
 class FundaSpider(CrawlSpider):
+    base_url = 'http://www.funda.nl/huur'
     name, start_urls = 'funda', ['http://www.funda.nl/huur/%s/+15km/sorteer-datum-af/p1']
     rules = (
         Rule(LxmlLinkExtractor(allow=('http://www.funda.nl/huur/'), restrict_xpaths=('//div[@id="pagerContainer"]')), callback='parse_page',
@@ -105,7 +106,7 @@ class FundaSpider(CrawlSpider):
         for listed_ad in selector.xpath("//li[contains(concat(' ', normalize-space(@class), ' '), ' nvm ')]"):
             l = FundaLoader(item=AdvertisedItem(), selector=listed_ad)
             l.add_value("source", self.name)
-            l.add_value("base_address", response.url)
+            l.add_value("base_address", self.base_url)
             l.add_css("link", ".object-media-wrapper::attr(href)")
             l.add_xpath("price", ".//span[@class='price']", re="(\d+\.*\d+)")
             l.add_css("street", ".object-street ")
