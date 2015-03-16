@@ -69,11 +69,11 @@ class ParariusSpider(CrawlSpider):
     name = "pararius"
     allowed_domains = ["pararius.nl"]
     start_urls = [
-        'http://www.pararius.nl/huurwoningen/%s/0-2000',
+        'http://www.pararius.nl/huurwoningen/%s/straal-25/0-2000',
     ]
 
     rules = (
-        Rule(LxmlLinkExtractor(allow=('http://www.pararius.nl/huurwoningen/amsterdam/0-2000/'),
+        Rule(LxmlLinkExtractor(allow=('http://www.pararius.nl/huurwoningen/'),
                                restrict_xpaths=('//ul[@id="pagination-digg"]'), ),
              callback='parse_page',
              follow=True),)
