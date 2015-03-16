@@ -41,6 +41,8 @@ class HoekstraenvaneckSpider(CrawlSpider):
             l.add_css("link", ".woninglink::attr(onclick)", re="='(.+)'")
             l.add_css("price", ".detailsrechts", MapCompose(remove_dot), re="(\d+\.*\d+)")
 
+            l.add_value("base_address", response.url)
+
             l.add_value("source", self.name)
             l.add_value("html", listed_ad.extract())
 
