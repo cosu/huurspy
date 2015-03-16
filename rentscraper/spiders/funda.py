@@ -89,7 +89,7 @@ class FundaLoader(ItemLoader):
 
 
 class FundaSpider(CrawlSpider):
-    name, start_urls = 'funda', ['http://www.funda.nl/huur/%s/sorteer-datum-af/p1']
+    name, start_urls = 'funda', ['http://www.funda.nl/huur/%s/+15km/sorteer-datum-af/p1']
     rules = (
         Rule(LxmlLinkExtractor(allow=('http://www.funda.nl/huur/'), restrict_xpaths=('//div[@id="pagerContainer"]')), callback='parse_page',
              follow=True),)
