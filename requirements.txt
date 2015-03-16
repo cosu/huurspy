@@ -5,3 +5,4 @@ pymongo
 scrapy-mongodb
 pushbullet.py
 twisted
+fabric
