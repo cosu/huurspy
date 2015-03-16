@@ -67,6 +67,7 @@ class ParariusLoader(ItemLoader):
 
 class ParariusSpider(CrawlSpider):
     name = "pararius"
+    base_url = 'http://www.pararius.nl'
     allowed_domains = ["pararius.nl"]
     start_urls = [
         'http://www.pararius.nl/huurwoningen/%s/straal-25/0-2000',
@@ -111,7 +112,7 @@ class ParariusSpider(CrawlSpider):
             l.add_xpath("street", './/div[@class="addressTitle"]/a/text()')
             l.add_xpath("hood", './/div[@class="addressTitle"]/a/text()')
             l.add_xpath("price", './/strong[@class="price"]/b')
-            l.add_value("base_address", response.url)
+            l.add_value("base_address", self.base_url)
             l.add_value("source", self.name)
             l.add_value("html", listed_ad.extract())
 

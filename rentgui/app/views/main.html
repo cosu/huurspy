@@ -5,9 +5,15 @@
   <h3 class="text-muted">rentgui</h3>
 </div>
 
+
 <div class="row">
     <nav ng-hide="errorNotFound">
+
         <ul class="pager">
+            <li>
+                <input type="text" ng-model="city" placeholder="City"
+                   class="input-large" ng-change="setCurrentPage(currentPage)">
+            </li>
             <li ng-class="posts._links.previous == null ? 'disabled' : ''">
                 <a ng-show="currentPage > 1" ng-click="setCurrentPage(currentPage - 1)">Newer</a>
                 <span ng-show="currentPage === 1">Newer</span>
