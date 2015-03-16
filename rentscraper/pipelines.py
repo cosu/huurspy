@@ -1,11 +1,9 @@
-from urllib import quote
 import datetime
 from pymongo import ReadPreference
 from pymongo.mongo_client import MongoClient
 from scrapy.conf import settings
 from scrapy import log
 from pushbullet import Pushbullet
-import urlparse
 from scrapy.exceptions import DropItem
 from scrapy.contrib.exporter import BaseItemExporter
 
@@ -33,7 +31,8 @@ class InvalidItemPipeline(BaseItemExporter):
 
             raise DropItem("Invalid item (missing price or place) %s" % item)
         else:
-            dict_item.pop("html", None)
+            item.pop("html", None)
+            item['price'] = int(item['price'])
             return item
 
 
