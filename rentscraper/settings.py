@@ -19,5 +19,5 @@ MONGODB_DATABASE = 'scrapy'
 MONGODB_COLLECTION = 'rentscraper'
 MONGODB_COLLECTION_INVALID = 'rentscraper_invalid'
 MAX_PRICE = 1100
-PLACES = ['amsterdam', 'amstelveen', 'zandaam', 'hilversum', 'haarlem', 'den-haag']
+PLACES = ['amsterdam', 'amstelveen', 'zandaam', 'hilversum', 'haarlem', 'den haag']
 
