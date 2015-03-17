@@ -51,7 +51,6 @@ angular.module('rentguiApp')
                     ad['ts'] = new Date(value['scrapy-mongodb']['ts']['$date']);
                     var base_address = value['base_address'] || "";
                     ad['link1'] = base_address + value['link'];
-                    //ad['link1'] = angular.element("<div></div>");
                     ads.push(ad);
 
                 });
