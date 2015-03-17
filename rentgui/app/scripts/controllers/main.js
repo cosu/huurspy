@@ -2,18 +2,32 @@
 
 angular.module('rentguiApp')
     .controller('MainCtrl', function ($scope, $log, $http, $q) {
-        var baseURL = 'http://localhost:8080/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=50&page=';
-
+        var baseURL = 'http://localhost:8080/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
+        $scope.minPrice = 500;
+        $scope.maxPrice = 1500;
+        $scope.city = "amsterdam";
 
         $scope.setCurrentPage = function (num) {
             $scope.currentPage = num;
-            var pageURL  = baseURL + $scope.currentPage;
+            var pageURL = baseURL + $scope.currentPage;
 
-            if (!$scope.city== '') {
-                //{"name":{"$regex":".*k"}}
+            if (!$scope.city == '') {
                 pageURL += '&filter={\"place\":{ \"$regex\":\".*' + $scope.city + '\", "$options": "i" }}';
 
             }
+
+            if (!$scope.maxPrice == '' && !$scope.minPrice == '') {
+                pageURL += '&filter={\"price\":{ \"$gte\":' + $scope.minPrice + ', \"$lte\":' + $scope.maxPrice + '}}';
+            } else {
+                if (!$scope.maxPrice == '') {
+                    pageURL += '&filter={\"price\":{ \"$lte\":' + $scope.maxPrice + '}}';
+                }
+
+                if (!$scope.minPrice == '') {
+                    pageURL += '&filter={\"price\":{ \"$gte\":' + $scope.minPrice + '}}';
+                }
+            }
+
 
             //promise to return
             var deferred = $q.defer();

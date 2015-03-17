@@ -14,6 +14,14 @@
                 <input type="text" ng-model="city" placeholder="City"
                    class="input-large" ng-change="setCurrentPage(currentPage)">
             </li>
+             <li>
+                <input type="text" ng-model="maxPrice" placeholder="maxPrice"
+                   class="input-large" ng-change="setCurrentPage(currentPage)">
+            </li>
+            <li>
+                <input type="text" ng-model="minPrice" placeholder="minPrice"
+                   class="input-large" ng-change="setCurrentPage(currentPage)">
+            </li>
             <li ng-class="posts._links.previous == null ? 'disabled' : ''">
                 <a ng-show="currentPage > 1" ng-click="setCurrentPage(currentPage - 1)">Newer</a>
                 <span ng-show="currentPage === 1">Newer</span>
