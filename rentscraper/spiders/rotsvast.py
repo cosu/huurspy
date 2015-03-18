@@ -23,14 +23,6 @@ def _extract_type(description):
     return description.split(",")[0].strip()
 
 
-def _extract_surface(description):
-    return description.split("-")[0].split(":")[1]
-
-
-def _extract_rooms(description):
-    return description.split("-")[1].split()[0]
-
-
 class RotsvastLoader(ItemLoader):
     default_input_processor = MapCompose(remove_tags, unicode.strip)
     default_output_processor = TakeFirst()
@@ -38,8 +30,6 @@ class RotsvastLoader(ItemLoader):
     parking_in = MapCompose(default_input_processor, has_pp)
     street_in = MapCompose(default_input_processor, _extract_street)
     place_in = MapCompose(default_input_processor, _extract_place)
-    rooms_in = MapCompose(default_input_processor, _extract_rooms)
-    surface_in = MapCompose(default_input_processor, _extract_surface)
 
 
 class RotsvastSpider(CrawlSpider):
@@ -68,8 +58,8 @@ class RotsvastSpider(CrawlSpider):
             l.add_xpath("street", ".//h4")
             l.add_xpath("parking", ".//p[2]")
             l.add_xpath("postcode", ".//p[1]")
-            l.add_xpath("surface", ".//p[3]")
-            l.add_xpath("rooms", ".//p[3]")
+            l.add_xpath("surface", ".//p[3]", re="(\d{2,})m")
+            l.add_xpath("rooms", ".//p[3]", re="(\d) kamer")
             l.add_value("base_address", response.url)
             l.add_value("html", listed_ad.extract())
 
