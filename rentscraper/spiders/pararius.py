@@ -114,6 +114,8 @@ class ParariusSpider(CrawlSpider):
             l.add_xpath("price", './/strong[@class="price"]/b')
             l.add_value("base_address", self.base_url)
             l.add_value("source", self.name)
+            l.add_css("surface", ".deform", re="(\d{2,}) m")
+            l.add_css("rooms", ".deform", re="(\d) slaapkamer")
             l.add_value("html", listed_ad.extract())
 
             yield l.load_item()
