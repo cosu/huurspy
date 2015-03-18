@@ -9,8 +9,8 @@ USER_AGNET = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36
 
 ITEM_PIPELINES = {
     'rentscraper.pipelines.InvalidItemPipeline': 100,
-    # 'rentscraper.pipelines.PushbulletPipeline': 300,
-    # 'scrapy_mongodb.MongoDBPipeline': 900,
+    'rentscraper.pipelines.PushbulletPipeline': 300,
+    'scrapy_mongodb.MongoDBPipeline': 900,
 }
 
 MONGODB_ADD_TIMESTAMP = True
@@ -21,4 +21,3 @@ MONGODB_COLLECTION_INVALID = 'rentscraper_invalid'
 MAX_PRICE = 1100
 PLACES = ['amsterdam', 'amstelveen', 'zandaam', 'hilversum', 'haarlem', 'den haag']
 
-DEPTH_LIMIT=1
