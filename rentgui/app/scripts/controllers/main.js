@@ -2,7 +2,7 @@
 
 angular.module('rentguiApp')
     .controller('MainCtrl', function ($scope, $log, $http, $q) {
-        var baseURL = 'http://localhost:8000/rest/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
+        var baseURL = 'http://localhost:8000/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
         $scope.minPrice = 500;
         $scope.maxPrice = 1500;
         $scope.city = "amsterdam";
