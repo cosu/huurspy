@@ -59,7 +59,6 @@ class PushbulletPipeline(object):
         if int(item['price']) <= settings['MAX_PRICE'] and item['place'].lower() in settings['PLACES']:
             # the item is not in mongo
             if self.collection.find({"link": item['link']}).count() == 0:
-                self.debug(spider, item['link'])
                 self.ads_to_send.append(item)
         return item
 
@@ -71,9 +70,7 @@ class PushbulletPipeline(object):
             log.msg("[NEW] item %s " % item, level=log.INFO, spider=spider)
 
         if len(links) and self.use_pushbullet:
-            log.msg("Sending %d new items " % len(item), level=log.INFO, spider=spider)
-            self.pb.push_note("New ads", "\n".join(links))
+            log.msg("Sending %d new items " % len(links), level=log.INFO, spider=spider)
+            self.pb.push_note("New ads (%s)" % len(links), "\n".join(links))
 
-    def debug(self, spider, msg):
-        log.msg(msg, level=log.DEBUG, spider=spider)
 
