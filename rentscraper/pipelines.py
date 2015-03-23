@@ -33,6 +33,7 @@ class InvalidItemPipeline(BaseItemExporter):
         else:
             item.pop("html", None)
             item['price'] = int(item['price'])
+            item['url'] = item.get_url()
             return item
 
 
