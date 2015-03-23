@@ -21,6 +21,7 @@ class AdvertisedItem(Item):
     age = Field()
     hood = Field()
     html = Field()
+    url = Field()
 
     def get_url(self):
 
