@@ -21,7 +21,7 @@ class InvalidItemPipeline(BaseItemExporter):
     def process_item(self, item, spider):
         dict_item = dict(self._get_serialized_fields(item))
         keys = item.keys()
-        if 'price' not in keys or 'place' not in keys or 'link' not in keys:
+        if 'price' not in keys or 'place' not in keys:
 
             dict_item['rentscraper'] = {'ts': datetime.datetime.utcnow()}
             dict_item['url'] = item.get_url()

@@ -28,12 +28,13 @@ class AdvertisedItem(Item):
         link_parts = ['base_address', 'link']
         clean_parts = []
         for link_part in link_parts:
-            if self.has_key(link_part): clean_parts.append(self[link_part])
+            if link_part in self.keys():
+                clean_parts.append(self[link_part])
 
         if not len(clean_parts):
             return "http://nolink"
 
-        if len (clean_parts) > 1:
+        if len(clean_parts) > 1:
             return urlparse.urljoin(*clean_parts)
         else:
             return clean_parts[0]
