@@ -38,7 +38,7 @@ class PerfecthousingSpider(CrawlSpider):
             l.add_xpath("surface", ".//td[3]/strong", re="\d+")
             l.add_xpath("rooms", ".//td[2]/strong", re="\d+")
             l.add_xpath("price", ".//td[1]/strong", re="(\d+\.*\d+)")
-            l.add_xpath("street", ".//h3/text()", re="(.*),")
+            l.add_xpath("street", ".//h3")
             l.add_xpath("place", ".//h3")
             l.add_value("base_address", response.url)
             l.add_value("source", self.name)
