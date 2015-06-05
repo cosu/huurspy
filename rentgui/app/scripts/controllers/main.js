@@ -8,13 +8,12 @@ angular.module('rentguiApp')
         $scope.city = "amsterdam";
         $scope.gridOptions = {
             columnDefs: [
-                {field: 'street' },
+                {field: 'place'},
                 {field: 'price'},
                 {field: 'ts', cellTemplate :'<div class="ui-grid-cell-contents">{{COL_FIELD|date: "yyyy-MM-dd HH:mm"}}</div>', name:'Date' },
-
-                {field: 'place'},
                 {field: 'url', cellTemplate: '<div class="ui-grid-cell-contents"><a target="_blank" href="{{ COL_FIELD}}">link</a></div>' },
-                {field: 'source'},
+                {field: 'street' },
+                {field: 'source'}
             ],
 
             data: 'ads'
