@@ -2,10 +2,22 @@
 
 angular.module('rentguiApp')
     .controller('MainCtrl', function ($scope, $log, $http, $q) {
-        var baseURL = '/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
+        var baseURL = 'http://localhost:8080/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
         $scope.minPrice = 500;
         $scope.maxPrice = 1500;
         $scope.city = "amsterdam";
+        $scope.gridOptions = {
+            columnDefs: [
+                {field: 'street' },
+                {field: 'price'},
+                {field: 'ts'},
+                {field: 'source'},
+                {field: 'place'},
+                {field: 'url', cellTemplate: '<div class="ui-grid-cell-contents"><a href="{{ COL_FIELD}}">link</a></div>' }
+            ],
+
+            data: 'ads'
+        };
 
         $scope.setCurrentPage = function (num) {
             $scope.currentPage = num;
@@ -55,9 +67,9 @@ angular.module('rentguiApp')
 
                 });
 
-                $scope.grid = ads;
+                $scope.ads= ads;
 
-
+                console.log($scope.gridOptions)
                 //resolve promise
                 deferred.resolve();
 
