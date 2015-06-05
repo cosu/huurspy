@@ -2,7 +2,7 @@
 
 angular.module('rentguiApp')
     .controller('MainCtrl', function ($scope, $log, $http, $q) {
-        var baseURL = '/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
+        var baseURL = 'http://localhost:8080/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
         $scope.minPrice = 500;
         $scope.maxPrice = 1500;
         $scope.city = "amsterdam";
@@ -10,10 +10,11 @@ angular.module('rentguiApp')
             columnDefs: [
                 {field: 'street' },
                 {field: 'price'},
-                {field: 'ts'},
-                {field: 'source'},
+                {field: 'ts', cellTemplate :'<div class="ui-grid-cell-contents">{{COL_FIELD|date: "yyyy-MM-dd HH:mm"}}</div>', name:'Date' },
+
                 {field: 'place'},
-                {field: 'url', cellTemplate: '<div class="ui-grid-cell-contents"><a target="_blank" href="{{ COL_FIELD}}">link</a></div>' }
+                {field: 'url', cellTemplate: '<div class="ui-grid-cell-contents"><a target="_blank" href="{{ COL_FIELD}}">link</a></div>' },
+                {field: 'source'},
             ],
 
             data: 'ads'
