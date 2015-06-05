@@ -13,7 +13,7 @@ angular.module('rentguiApp')
                 {field: 'ts'},
                 {field: 'source'},
                 {field: 'place'},
-                {field: 'url', cellTemplate: '<div class="ui-grid-cell-contents"><a href="{{ COL_FIELD}}">link</a></div>' }
+                {field: 'url', cellTemplate: '<div class="ui-grid-cell-contents"><a target="_blank" href="{{ COL_FIELD}}">link</a></div>' }
             ],
 
             data: 'ads'
