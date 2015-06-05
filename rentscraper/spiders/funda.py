@@ -3,15 +3,15 @@ from scrapy.contrib.linkextractors.lxmlhtml import LxmlLinkExtractor
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import MapCompose, TakeFirst
 from scrapy.contrib.spiders import Rule, CrawlSpider
-import unicodedata
 from w3lib.html import remove_tags
 from rentscraper.items import AdvertisedItem
 from rentscraper.util import remove_dot
 from rentscraper.util import has_pp
-from re import sub
+from re import sub, compile
 
 __author__ = 'cdumitru'
 
+regex = "(?P<street>\d{2} \w{2})\s+(?P<place>[\w+ ]+)"
 
 def _clean(description):
     result = {
@@ -39,15 +39,16 @@ def _clean(description):
         if "kamers" in clean[2]:
             result['rooms'] = clean[2].split()[0]
 
-
     return result
 
 def _extract_place(description):
-    tokens = sub('\s+', ',', description.strip()).strip().split(",")
-    if (len(tokens)) > 2:
-        return tokens[2]
+    result = compile(regex).search(description)
+
+    if result:
+        return result.group('place')
     else:
-        return str(tokens)
+        return description
+
 
 
 def _extract_postcode(description):
