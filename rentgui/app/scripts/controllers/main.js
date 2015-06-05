@@ -2,7 +2,7 @@
 
 angular.module('rentguiApp')
     .controller('MainCtrl', function ($scope, $log, $http, $q) {
-        var baseURL = 'http://localhost:8080/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
+        var baseURL = '/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=';
         $scope.minPrice = 500;
         $scope.maxPrice = 1500;
         $scope.city = "amsterdam";
@@ -48,7 +48,6 @@ angular.module('rentguiApp')
             var request = $http.get(pageURL, {});
 
             request.success(function (data) {
-                console.log('GET ' + pageURL);
                 $scope.posts = data;
                 $scope.pages = data['_total_pages'];
 
@@ -70,7 +69,6 @@ angular.module('rentguiApp')
 
                 $scope.ads= ads;
 
-                console.log($scope.gridOptions)
                 //resolve promise
                 deferred.resolve();
 
