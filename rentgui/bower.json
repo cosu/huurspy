@@ -10,7 +10,9 @@
     "angular-route": "1.3.14",
     "angular-resource": "1.3.14",
     "json3": "3.3.2",
-    "angular-ui-grid":"#*"
+    "angular-ui-grid":"#*",
+    "dcjs": "2.0.0-beta.3",
+    "crossfilter": "~1.3.0"
   },
   "devDependencies": {
     "angular-mocks": "1.3.14",

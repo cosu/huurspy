@@ -1,8 +1,9 @@
 <div class="header">
-  <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-  </ul>
-  <h3 class="text-muted">rentgui</h3>
+    <ul class="nav nav-pills pull-right">
+        <li class="active"><a ng-href="#">Home</a></li>
+        <li><a ng-href="#/stats">Stats</a></li>
+    </ul>
+    <h3 class="text-muted">rentgui</h3>
 </div>
 
 
@@ -12,15 +13,15 @@
         <ul class="pager">
             <li>
                 <input type="text" ng-model="city" placeholder="City"
-                   class="input-large" ng-change="setCurrentPage(currentPage)">
+                       class="input-large" ng-change="setCurrentPage(currentPage)">
             </li>
-             <li>
+            <li>
                 <input type="text" ng-model="maxPrice" placeholder="maxPrice"
-                   class="input-large" ng-change="setCurrentPage(currentPage)">
+                       class="input-large" ng-change="setCurrentPage(currentPage)">
             </li>
             <li>
                 <input type="text" ng-model="minPrice" placeholder="minPrice"
-                   class="input-large" ng-change="setCurrentPage(currentPage)">
+                       class="input-large" ng-change="setCurrentPage(currentPage)">
             </li>
             <li ng-class="posts._links.previous == null ? 'disabled' : ''">
                 <a ng-show="currentPage > 1" ng-click="setCurrentPage(currentPage - 1)">Newer</a>
@@ -35,7 +36,7 @@
     </nav>
 
 </div>
-  <div ui-grid="gridOptions" class="myGrid"></div>
+<div ui-grid="gridOptions" class="myGrid"></div>
 
 
-<div class="footer"> </div>
+<div class="footer"></div>

@@ -1,3 +1,5 @@
 .myGrid {
     height: 700px;
   }
+
+.dc-chart g.row text {fill: black;}

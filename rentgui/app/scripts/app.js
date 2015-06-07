@@ -9,6 +9,11 @@ angular
     ])
     .config(function ($routeProvider, $httpProvider) {
         $routeProvider
+
+            .when('/stats', {
+                templateUrl: 'views/stats.html',
+                controller: 'StatsCtrl'
+            })
             .when('/', {
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
