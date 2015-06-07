@@ -97,6 +97,7 @@ angular.module('rentguiApp')
         var pageNum = 1;
         var request = $http.get(baseURL + pageNum, {});
         var ads = [];
+        $scope.loading = true;
 
         request.success(function (data) {
             var pages = data._total_pages;
@@ -139,7 +140,7 @@ angular.module('rentguiApp')
             var priceGroup  = priceDimension.group(function(d) { return Math.floor(d.x/$scope.binSize); });
 
 
-            //$scope.count = priceDimension.groupAll().value();
+
 
             priceChart.width(420)
                 .height(400)
@@ -157,6 +158,7 @@ angular.module('rentguiApp')
                 .rowsCap(10)
                 .render()
 
+            $scope.loading = false;
 
 
         })
