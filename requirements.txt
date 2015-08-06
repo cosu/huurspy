@@ -6,3 +6,4 @@ scrapy-mongodb
 pushbullet.py
 twisted
 fabric
+lxml
