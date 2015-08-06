@@ -10,3 +10,4 @@ lxml
 cssselect
 cryptography
 websocket-client
+w3lib
