@@ -8,3 +8,4 @@ twisted
 fabric
 lxml
 cssselect
+cryptography
