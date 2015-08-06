@@ -1,5 +1,5 @@
 requests
-scrapy
+Scrapy==0.24.5
 service_identity
 pymongo
 scrapy-mongodb
