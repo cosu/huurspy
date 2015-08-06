@@ -9,4 +9,4 @@ fabric
 lxml
 cssselect
 cryptography
-websocket
+websocket-client
