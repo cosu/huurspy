@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('rentguiApp')
-	.controller('StatsCtrl', function ($scope, $log, $http, $q, dataservice {
+	.controller('StatsCtrl', function ($scope, $log, $http, $q, dataservice) {
         var baseURL = '/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=1000&page=';
         var deferred = $q.defer();
         var pageNum = 1;

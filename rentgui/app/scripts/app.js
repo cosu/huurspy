@@ -2,7 +2,6 @@
 
 angular
     .module('rentguiApp', [
-        'ngResource',
         'ngSanitize',
         'ngRoute',
         'ui.grid'
