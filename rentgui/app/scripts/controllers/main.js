@@ -6,7 +6,7 @@
         .controller('MainCtrl', function ($scope, $log, $http, $q, dataservice) {
             $scope.minPrice = 500;
             $scope.maxPrice = 1500;
-            $scope.place = "amsterdam";
+            $scope.place = 'amsterdam';
             $scope.gridOptions = {
                 columnDefs: [
                     {field: 'place'},
@@ -39,9 +39,8 @@
                 dataservice.getPage(options).then(function (ads) {
                     $scope.nextPage = ads.page + 1;
                     $scope.pages = ads.pages;
-                    console.log($scope.pages);
                     $scope.ads = ads.items;
-                })
+                });
 
             };
 

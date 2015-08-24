@@ -16,7 +16,7 @@
                 var options = queryOptions || {};
                 var pageSize = options.pageSize || 20;
                 var page = options.page || 1;
-                var maxPrice = options.maxPrice || 0;
+                var maxPrice = options.maxPrice || 9999;
                 var minPrice = options.minPrice || 0;
                 var place = options.place|| "";
 
