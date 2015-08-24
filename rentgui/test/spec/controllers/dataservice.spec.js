@@ -4,78 +4,173 @@ describe('dataservice', function () {
 
 
     var data = {
-        "_embedded": {
-            "rh:doc": [{
-                "_embedded": {}
-                , "_links": {
-                    "self": {"href": "/scrapy/rentscraper/55d406adbd618f0899e6397c"},
-                    "rh:coll": {"href": "/scrapy"},
-                    "curies": [{
-                        "href": "http://www.restheart.org/docs/v0.10/#api-doc-{rel}",
-                        "name": "rh"
-                    }]
+        "items": [
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-07-08T01:30:04.365000"
                 },
-                "_type": "DOCUMENT",
-                "_id": {"$oid": "55d406adbd618f0899e6397c"},
-                "hood": "West", "url": "http://www.rooftrack.nl/EenheidDetails/150046056",
-                "price": 825,
-                "surface": "69m",
-                "source": "rooftrack",
-                "street": "Jacob van Lennepstraat 94 A",
+                "url": "http://www.funda.nl/huur/amsterdam/appartement-49439862-poeldijkstraat-173/",
+                "price": 530,
+                "surface": "25 m",
+                "availability": "In overleg",
+                "source": "funda",
+                "street": "Poeldijkstraat 173",
+                "link": "/huur/amsterdam/appartement-49439862-poeldijkstraat-173/",
+                "postcode": "1059 VK",
                 "place": "Amsterdam",
-                "rooms": "3",
-                "link": "/EenheidDetails/150046056",
-                "scrapy-mongodb": {"ts": {"$date": 1439958701033}},
-                "type": "Eengezinswoning",
-                "base_address": "http://www.rooftrack.nl/Zoeken/geo-52;3651323157895,4;88880105263158,0,Amsterdam/huur-0-9999/page-3,10"
-                , "_created_on": "2015-08-19T04:31:41Z"
+                "_id": "559c7d1ca8282f2d221cb5b2",
+                "age": "sinds vandaag",
+                "base_address": "http://www.funda.nl"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-06-10T01:30:05.804000"
+                },
+                "url": "http://www.funda.nl/huur/amsterdam/appartement-49409432-poeldijkstraat-47/",
+                "price": 530,
+                "surface": "25 m",
+                "availability": "In overleg",
+                "source": "funda",
+                "street": "Poeldijkstraat 47",
+                "link": "/huur/amsterdam/appartement-49409432-poeldijkstraat-47/",
+                "postcode": "1059 VG",
+                "place": "Amsterdam",
+                "_id": "5577931da8282f626d7e41f8",
+                "age": "sinds vandaag",
+                "base_address": "http://www.funda.nl"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-29T16:35:20.442000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam/PR0001218156/marco-polostraat",
+                "price": 550,
+                "surface": "17",
+                "source": "pararius",
+                "street": "Kamer Marco Polostraat",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam/PR0001218156/marco-polostraat",
+                "_id": "55689548a8282f0cc6793a7a",
+                "hood": "Hoofdweg en omgeving",
+                "rooms": "1"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-27T20:30:24.474000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam/PR0001217456/prinseneiland",
+                "price": 575,
+                "surface": "16",
+                "source": "pararius",
+                "street": "Prinseneiland",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam/PR0001217456/prinseneiland",
+                "_id": "55662960a8282f7f0ee8ec92",
+                "hood": "Haarlemmerbuurt",
+                "rooms": "1"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-26T16:01:58.897000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam/PR0001217092/het-hoogt",
+                "price": 550,
+                "surface": "12",
+                "source": "pararius",
+                "street": "Kamer Het Hoogt",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam/PR0001217092/het-hoogt",
+                "_id": "556498f6a8282f7b5c082155",
+                "hood": "Buikslotermeer",
+                "rooms": "1"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-25T08:50:32.259000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam/PR0001215477/dijkgraafplein",
+                "price": 600,
+                "surface": "15",
+                "source": "pararius",
+                "street": "Dijkgraafplein",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam/PR0001215477/dijkgraafplein",
+                "_id": "5562e258a8282f079adbae46",
+                "hood": "De Punt",
+                "rooms": "4"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-20T19:10:58.645000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam-zuidoost/PR0001209572/leerdamhof",
+                "price": 600,
+                "surface": "15",
+                "source": "pararius",
+                "street": "Leerdamhof",
+                "place": "Amsterdam Zuidoost",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam-zuidoost/PR0001209572/leerdamhof",
+                "_id": "555cdc42a8282f18610fcace",
+                "hood": "Nellestein",
+                "rooms": "4"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-20T19:10:49.558000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam/PR0001215476/dijkgraafplein",
+                "price": 600,
+                "surface": "15",
+                "source": "pararius",
+                "street": "Dijkgraafplein",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam/PR0001215476/dijkgraafplein",
+                "_id": "555cdc39a8282f18610fc9a1",
+                "hood": "De Punt",
+                "rooms": "4"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-20T19:10:49.555000"
+                },
+                "url": "http://www.pararius.nl/appartement-te-huur/amsterdam/PR0001215477/dijkgraafplein",
+                "price": 600,
+                "surface": "15",
+                "source": "pararius",
+                "street": "Dijkgraafplein",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/appartement-te-huur/amsterdam/PR0001215477/dijkgraafplein",
+                "_id": "555cdc39a8282f18610fc9a0",
+                "hood": "De Punt",
+                "rooms": "4"
+            },
+            {
+                "scrapy-mongodb": {
+                    "ts": "2015-05-20T19:10:39.228000"
+                },
+                "url": "http://www.pararius.nl/kamer-te-huur/amsterdam/PR0001212115/polijsterweg",
+                "price": 500,
+                "surface": "14",
+                "source": "pararius",
+                "street": "Polijsterweg",
+                "place": "Amsterdam",
+                "base_address": "http://www.pararius.nl",
+                "link": "/kamer-te-huur/amsterdam/PR0001212115/polijsterweg",
+                "_id": "555cdc2fa8282f18610fc84a",
+                "hood": "Buiksloterham",
+                "rooms": "3"
             }
-                , {"_embedded": {},
-                    "_links": {
-                        "self": {"href": "/scrapy/rentscraper/55ce6bedbd618f71ccca96d4"},
-                        "rh:coll": {"href": "/scrapy"},
-                        "curies": [{"href": "http://www.restheart.org/docs/v0.10/#api-doc-{rel}", "name": "rh"}]
-                    },
-                    "_type": "DOCUMENT",
-                    "_id": {"$oid": "55ce6bedbd618f71ccca96d4"},
-                    "scrapy-mongodb": {"ts": {"$date": 1439591405068}},
-                    "url": "http://www.funda.nl/huur/amsterdam/huis-49560714-gerrit-van-erkelstraat-6/",
-                    "price": 1275,
-                    "surface": "96 m",
-                    "source": "funda",
-                    "street": "Gerrit van Erkelstraat 6",
-                    "link": "/huur/amsterdam/huis-49560714-gerrit-van-erkelstraat-6/",
-                    "postcode": "1019 JW",
-                    "place": "Amsterdam",
-                    "age": "sinds vandaag",
-                    "availability": "Per direct beschikbaar",
-                    "base_address": "http://www.funda.nl",
-                    "rooms": "3",
-                    "_created_on": "2015-08-14T22:30:05Z"
-                }]
-        },
-        "_links": {
-            "self": {"href": "/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=20&page=1&filter={\"place\":{ \"$regex\":\".*amsterdam\", \"$options\": \"i\" }}&filter={\"price\":{ \"$gte\":500, \"$lte\":1500}}"},
-            "first": {"href": "/scrapy/rentscraper?pagesize=20&sort_by=-scrapy-mongodb.ts&count&filter={\"place\":{ \"$regex\":\".*amsterdam\", \"$options\": \"i\" }}&filter={\"price\":{ \"$gte\":500, \"$lte\":1500}}"},
-            "last": {"href": "/scrapy/rentscraper?page=121&pagesize=20&sort_by=-scrapy-mongodb.ts&count&filter={\"place\":{ \"$regex\":\".*amsterdam\", \"$options\": \"i\" }}&filter={\"price\":{ \"$gte\":500, \"$lte\":1500}}"},
-            "next": {"href": "/scrapy/rentscraper?page=2&pagesize=20&sort_by=-scrapy-mongodb.ts&count&filter={\"place\":{ \"$regex\":\".*amsterdam\", \"$options\": \"i\" }}&filter={\"price\":{ \"$gte\":500, \"$lte\":1500}}"},
-            "rh:db": {"href": "/scrapy"},
-            "rh:filter": {"href": "/scrapy/rentscraper/{?filter}", "templated": true},
-            "rh:sort": {"href": "/scrapy/rentscraper/{?sort_by}", "templated": true},
-            "rh:paging": {"href": "/scrapy/rentscraper/{?page}{&pagesize}", "templated": true},
-            "rh:countandpaging": {"href": "/scrapy/rentscraper/{?page}{&pagesize}&count", "templated": true},
-            "rh:indexes": {"href": "/scrapy/rentscraper/_indexes"},
-            "curies": [{"href": "http://www.restheart.org/docs/v0.10/#api-coll-{rel}", "templated": true, "name": "rh"}]
-        },
-        "_type": "COLLECTION",
-        "_id": "rentscraper",
-        "_created_on": "2015-03-16T20:57:11Z",
-        "_etag": {"$oid": "550743a70364bbd296dfd168"},
-        "_lastupdated_on": "2015-03-16T20:57:11Z",
-        "_collection-props-cached": false,
-        "_size": 2410,
-        "_total_pages": 1,
-        "_returned": 2
+        ],
+        "total": 22,
+        "page": 1,
+        "page_size": 10
     };
 
 
@@ -92,39 +187,40 @@ describe('dataservice', function () {
     }));
 
     it('should call the right url to get a page', function () {
-        $httpBackend.expectGET("/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=1000&page=1")
-            .respond({_embedded: {"rh:doc": []}});
+        $httpBackend.expectGET("/ads?page_size=1000&page=1")
+            .respond({items: []});
         ds.getAll();
         $httpBackend.flush();
     });
 
     it('should call the right url to get a page with minimum price', function () {
-        $httpBackend.expectGET("/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=1000&page=1&filter={\"price\":{ \"$gte\":100}}")
-            .respond({_embedded: {"rh:doc": []}});
+        $httpBackend.expectGET("/ads?page_size=1000&page=1&min_price=100")
+            .respond({items: []});
         ds.getAll({minPrice: 100});
         $httpBackend.flush();
     });
 
     it('should call the right url to get a page with maximum price', function () {
-        $httpBackend.expectGET("/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=1000&page=1&filter={\"price\":{ \"$lte\":100}}")
-            .respond({_embedded: {"rh:doc": []}});
+        $httpBackend.expectGET("/ads?page_size=1000&page=1&max_price=100")
+            .respond({items: []});
         ds.getAll({maxPrice: 100});
         $httpBackend.flush();
     });
 
     it('should call the right url to get a page with minimum and maximum price', function () {
-        $httpBackend.expectGET("/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=1000&page=1&filter={\"price\":{ \"$gte\":100, \"$lte\":100}}")
-            .respond({_embedded: {"rh:doc": []}});
+        $httpBackend.expectGET("/ads?page_size=1000&page=1&min_price=100&max_price=100")
+            .respond({items: []});
         ds.getAll({minPrice: 100, maxPrice: 100});
         $httpBackend.flush();
     });
 
     it('should call the right url and return a list of valid ads', function () {
-        $httpBackend.expectGET("/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=1000&page=1")
+        $httpBackend.expectGET("/ads?page_size=1000&page=1")
             .respond(data);
-        ds.getAll().then(function(ads){
-            expect(ads.data.length).toEqual(2);
-            angular.forEach(ads.data, function(ad){
+        ds.getAll().then(function (ads) {
+            expect(ads.items).toBeDefined();
+            expect(ads.items.length).toEqual(10);
+            angular.forEach(ads.items, function (ad) {
                 expect(ad.price).toBeDefined();
                 expect(ad.street).toBeDefined();
                 expect(ad.place).toBeDefined();

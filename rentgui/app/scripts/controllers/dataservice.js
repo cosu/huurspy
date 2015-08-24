@@ -3,7 +3,7 @@
 
     angular.module('rentguiApp')
         .factory('dataservice', ['$http', function ($http, $log) {
-            var baseURL = '/scrapy/rentscraper?sort_by=-scrapy-mongodb.ts&count&pagesize=PAGESIZE&page=PAGE';
+            var baseURL = '/ads?page_size=PAGESIZE&page=PAGE';
 
             return {
                 //getLatest: getLatest,
@@ -11,8 +11,8 @@
             };
 
 
-            function getAll(options) {
-                var options = options || {};
+            function getAll(queryOptions) {
+                var options = queryOptions || {};
                 var pageSize = options.pageSize || 1000;
                 var page = options.page || 1;
                 var maxPrice = options.maxPrice || 0;
@@ -22,35 +22,18 @@
                 var url = baseURL.replace("PAGESIZE", pageSize).replace("PAGE", page);
 
                 if (city.length > 0) {
-                    url += '&filter={\"place\":{ \"$regex\":\".*' + city + '\", "$options": "i" }}';
+                    url += '&city=' + city;
                 }
-
-                if (maxPrice > 0 && minPrice > 0) {
-                    url  += '&filter={\"price\":{ \"$gte\":' + minPrice + ', \"$lte\":' + maxPrice + '}}';
-                } else {
-                    if (maxPrice > 0) {
-                        url += '&filter={\"price\":{ \"$lte\":' + maxPrice + '}}';
-                    }
-
-                    if (minPrice > 0) {
-                        url += '&filter={\"price\":{ \"$gte\":' + minPrice + '}}';
-                    }
+                if (minPrice > 0) {
+                    url += '&min_price=' + minPrice;
+                }
+                if (maxPrice > 0) {
+                    url += '&max_price=' + maxPrice;
                 }
 
                 return $http.get(url).then(function (response) {
-                    var ads = [];
-                    var data = response.data;
-                    angular.forEach(data._embedded['rh:doc'], function (value, key) {
-                        var fields = ["street", "price", "source", "place"];
-                        var ad = {};
-                        angular.forEach(fields, function (field) {
-                            ad[field] = value[field];
-                        });
-                        ads.push(ad);
-
-                    });
-                    var result =  {data: ads, pages: data._total_pages, page: page}
-                    return result;
+                    console.log(response.data);
+                    return response.data;
                 })
                     .catch(function (data) {
                         $log.error(data)
