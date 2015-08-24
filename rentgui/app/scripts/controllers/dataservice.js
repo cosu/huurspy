@@ -3,26 +3,25 @@
 
     angular.module('rentguiApp')
         .factory('dataservice', ['$http', function ($http, $log) {
-            var baseURL = '/ads?page_size=PAGESIZE&page=PAGE';
+            var baseURL = 'http://localhost:5000/ads?page_size=PAGESIZE&page=PAGE';
 
             return {
-                //getLatest: getLatest,
-                getAll: getAll
+                getPage: getPage
             };
 
 
-            function getAll(queryOptions) {
+            function getPage(queryOptions) {
                 var options = queryOptions || {};
-                var pageSize = options.pageSize || 1000;
+                var pageSize = options.pageSize || 20;
                 var page = options.page || 1;
                 var maxPrice = options.maxPrice || 0;
                 var minPrice = options.minPrice || 0;
-                var city = options.city || "";
+                var place = options.place|| "";
 
                 var url = baseURL.replace("PAGESIZE", pageSize).replace("PAGE", page);
 
-                if (city.length > 0) {
-                    url += '&city=' + city;
+                if (place.length > 0) {
+                    url += '&place=' + place;
                 }
                 if (minPrice > 0) {
                     url += '&min_price=' + minPrice;
@@ -32,7 +31,6 @@
                 }
 
                 return $http.get(url).then(function (response) {
-                    console.log(response.data);
                     return response.data;
                 })
                     .catch(function (data) {

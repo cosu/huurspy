@@ -1,9 +1,8 @@
 <div class="header">
     <ul class="nav nav-pills pull-right">
         <li class="active"><a ng-href="#">Home</a></li>
-        <li><a ng-href="#/stats">Stats</a></li>
     </ul>
-    <h3 class="text-muted">rentgui</h3>
+    <h3 class="text-muted">HuurSpy</h3>
 </div>
 
 
@@ -12,7 +11,7 @@
 
         <ul class="pager">
             <li>
-                <input type="text" ng-model="city" placeholder="City"
+                <input type="text" ng-model="place" placeholder="City"
                        class="input-large" ng-change="setCurrentPage(currentPage)">
             </li>
             <li>
@@ -23,13 +22,15 @@
                 <input type="text" ng-model="minPrice" placeholder="minPrice"
                        class="input-large" ng-change="setCurrentPage(currentPage)">
             </li>
-            <li ng-class="posts._links.previous == null ? 'disabled' : ''">
-                <a ng-show="currentPage > 1" ng-click="setCurrentPage(currentPage - 1)">Newer</a>
-                <span ng-show="currentPage === 1">Newer</span>
+            <li>
+                <button class="btn btn-default" ng-disabled="currentPage === 1"
+                        ng-click="setCurrentPage(currentPage - 1)">Newer
+                </button>
             </li>
-            <li ng-class="posts._links.next == null ? 'disabled' : ''">
-                <a ng-show="currentPage < pages" ng-click="setCurrentPage(currentPage + 1)">Older</a>
-                <span ng-show="currentPage === pages">Older</span>
+            <li>
+                <button class="btn btn-default" ng-disabled="currentPage === pages"
+                        ng-click="setCurrentPage(currentPage + 1)">Older
+                </button>
             </li>
             <li class="lead" style="margin-left: 20px">page {{currentPage}}/{{pages}}</li>
         </ul>

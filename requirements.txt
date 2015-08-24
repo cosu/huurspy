@@ -13,4 +13,5 @@ scrapy-mongodb==0.8.1
 service-identity==14.0.0
 w3lib==1.11.0
 websocket-client==0.25.0
-
+Flask
+flask-cors

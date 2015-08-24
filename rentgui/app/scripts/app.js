@@ -1,30 +1,25 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular
-    .module('rentguiApp', [
-        'ngSanitize',
-        'ngRoute',
-        'ui.grid'
-    ])
-    .config(function ($routeProvider, $httpProvider) {
-        $routeProvider
+    angular
+        .module('rentguiApp', [
+            'ngSanitize',
+            'ngRoute',
+            'ui.grid'
+        ])
+        .config(function ($routeProvider, $httpProvider) {
+            $routeProvider
 
-            .when('/stats', {
-                templateUrl: 'views/stats.html',
-                controller: 'StatsCtrl'
-            })
-            .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
+                .when('/', {
+                    templateUrl: 'views/main.html',
+                    controller: 'MainCtrl'
+                })
+                .otherwise({
+                    redirectTo: '/'
+                });
 
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common["X-Requested-With"];
-        $httpProvider.defaults.withCredentials = true;
-        $httpProvider.defaults.headers.common["Accept"] = "application/hal+json";
-        $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-        $httpProvider.defaults.headers.common["No-Auth-Challenge"] = "true";
-    });
+            $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+
+        });
+
+})();
