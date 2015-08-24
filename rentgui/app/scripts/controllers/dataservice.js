@@ -2,8 +2,10 @@
 
 
     angular.module('rentguiApp')
-        .factory('dataservice', ['$http', function ($http, $log) {
-            var baseURL = 'http://localhost:5000/ads?page_size=PAGESIZE&page=PAGE';
+        .factory('dataservice', ['$http','$log','$location', function ($http, $log, $location) {
+            var baseURL = '/ads?page_size=PAGESIZE&page=PAGE';
+            if ($location.host() === '127.0.0.1')
+                baseURL =  'http://localhost:5000' + baseURL;
 
             return {
                 getPage: getPage
