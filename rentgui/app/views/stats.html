@@ -7,11 +7,11 @@
 </div>
 
 
-<div ng-show="loading"> Loading data. Wait.</div>
-<div class="body" ng-show="!loading">
+<div ng-show="vm.loading"> Loading data. Wait.</div>
+<div class="body" ng-show="!vm.loading">
 
 
-    Binsize {{binSize}}
+    Binsize {{vm.binSize}}
     <div id="price"></div>
     <div id="place"></div>
 </div>

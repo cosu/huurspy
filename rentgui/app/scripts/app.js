@@ -12,8 +12,16 @@
 
                 .when('/', {
                     templateUrl: 'views/main.html',
-                    controller: 'MainCtrl'
+                    controller: 'MainCtrl',
+                     controllerAs: 'vm'
                 })
+
+                .when('/stats', {
+                    templateUrl: 'views/stats.html',
+                    controller: 'StatsCtrl',
+                     controllerAs: 'vm'
+                })
+
                 .otherwise({
                     redirectTo: '/'
                 });

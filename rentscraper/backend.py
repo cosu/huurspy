@@ -14,6 +14,7 @@ except ImportError:
 import datetime
 from flask_cors import CORS
 
+
 class MongoJsonEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
@@ -44,7 +45,7 @@ def ads():
     page_size = int(request.args.get('page_size', 20))
     page = int(request.args.get('page', 1))
     min_price = int(request.args.get('min_price', 0))
-    max_price = int(request.args.get('max_price', 100))
+    max_price = int(request.args.get('max_price', 10000))
     place = request.args.get('place', "")
 
     query_options = {

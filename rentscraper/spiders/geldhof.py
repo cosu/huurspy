@@ -19,8 +19,6 @@ class GeldhofSpider(Spider):
         'http://www.geldhof.nl/huizen/smartselect.aspx?prefilter=Huuraanbod&pageNum=0',
     )
 
-
-
     def parse(self, response):
 
         selector = Selector(response)
