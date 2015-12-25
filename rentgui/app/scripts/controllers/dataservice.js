@@ -1,6 +1,5 @@
 (function () {
-
-
+  'use strict';
   angular.module('rentguiApp')
     .factory('dataservice', ['$http', '$log', '$location', function ($http, $log, $location) {
       var baseURL = '/ads?page_size=PAGESIZE&page=PAGE';

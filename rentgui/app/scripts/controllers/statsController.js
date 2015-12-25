@@ -5,25 +5,32 @@
       var vm = this;
       var deferred = $q.defer();
       vm.loading = true;
-      var options = {pageSize:10000, page :1};
+      var options = {pageSize: 5000, page: 1};
       vm.data = [];
-      dataservice.getPage(options).then(function(data){
+      dataservice.getPage(options).then(function (data) {
         var pages = data.pages;
         vm.data = data.items;
-        var receiveCount = pages-1;
-        for (var i = 2; i < pages + 1; i++) {
-          options.page = i;
-          dataservice.getPage(options).then(function(data){
-            receiveCount--;
-            angular.forEach(data.items, function(item){vm.data.push(item)});
-            $log.info(receiveCount);
-            if (receiveCount === 0){
-              deferred.resolve();
-            }
-        });
-        }
-      });
+        if (pages >= 2) {
+          vm.receiveCount = pages - 1;
+          for (var i = 2; i < pages + 1; i++) {
+            options.page = i;
+            dataservice.getPage(options).then(function (data) {
+              vm.receiveCount--;
+              angular.forEach(data.items, function (item) {
+                vm.data.push(item)
+              });
 
+              if (vm.receiveCount === 0) {
+                deferred.resolve();
+              }
+            });
+          }
+        }
+        else {
+          deferred.resolve();
+        }
+
+      });
 
 
       deferred.promise.then(function () {
