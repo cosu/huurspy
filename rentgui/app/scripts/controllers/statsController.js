@@ -3,10 +3,13 @@
   angular.module('rentguiApp')
     .controller('StatsCtrl', function ($log, $q, dataservice) {
       var vm = this;
-      var deferred = $q.defer();
       vm.loading = true;
-      var options = {pageSize: 5000, page: 1};
+      vm.binSize = 100;
       vm.data = [];
+
+      var deferred = $q.defer();
+      var options = {pageSize: 10000, page: 1, minPrice:100, maxPrice: 3000};
+
       dataservice.getPage(options).then(function (data) {
         var pages = data.pages;
         vm.data = data.items;
@@ -33,12 +36,10 @@
       });
 
 
-      deferred.promise.then(function () {
-        vm.binSize = 50;
+      function draw(){
         var priceChart = dc.barChart('#price');
         var placeChart = dc.rowChart('#place');
         var ndx = crossfilter(vm.data);
-        var all = ndx.groupAll();
         var priceDimension = ndx.dimension(function (d) {
           return d.price;
         });
@@ -46,16 +47,22 @@
           return d.place;
         });
 
-        var priceGroup = priceDimension.group(function (d) {
-          return Math.floor(d.x / vm.binSize);
+        var priceDimensionBin = ndx.dimension(function (d) {
+          return Math.floor(d.price / vm.binSize) * vm.binSize;
         });
+
+
+
+        var minPrice = priceDimension.bottom(1)[0].price;
+        var maxPrice = priceDimension.top(1)[0].price;
+
 
 
         priceChart.width(420)
           .height(400)
           .dimension(priceDimension)
-          .group(priceDimension.group().reduceCount())
-          .x(d3.scale.linear().domain([500, 3000]))
+          .group(priceDimensionBin.group().reduceCount())
+          .x(d3.scale.linear().domain([minPrice, maxPrice]))
           .xUnits(dc.units.fp.precision(vm.binSize))
           .elasticY(true)
           .render();
@@ -64,13 +71,14 @@
           .height(400)
           .dimension(placeDimension)
           .group(placeDimension.group())
-          .rowsCap(10)
-          .render()
+          .rowsCap(15)
+          .render();
 
         vm.loading = false;
 
+      }
 
-      })
+      deferred.promise.then(draw);
 
 
     });

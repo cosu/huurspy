@@ -8,7 +8,7 @@
     "angular-sanitize": "1.4.8",
     "angular-route": "1.4.8",
     "angular-ui-grid": "3.0.7",
-    "dcjs": "2.0.0-beta.17"
+    "dcjs": "2.0.0-beta.25"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8",
