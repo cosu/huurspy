@@ -1,6 +1,6 @@
 from bson import ObjectId, Code
 from flask import Flask, g, request, Response
-import pymongo
+from pymongo import DESCENDING
 from pymongo.mongo_client import MongoClient
 from scrapy.conf import settings
 from pymongo.read_preferences import ReadPreference
@@ -67,7 +67,7 @@ def ads():
     else:
         items_cursor = get_collection().find(query_options)
 
-    items = items_cursor.sort("scrapy-mongodb.ts",  pymongo.DESCENDING).skip(skip).limit(page_size)
+    items = items_cursor.sort("scrapy-mongodb.ts", DESCENDING).skip(skip).limit(page_size)
     data = {
         "total": total,
         "items": list(items),
@@ -90,9 +90,21 @@ def prices():
     """)
     prices = get_collection().group(key={"place"}, condition={}, initial={}, reduce=reducer)
 
-
     return jsonify({"ads": prices})
 
+
+@app.route("/fix")
+def fix():
+    items = get_collection().find(projection=["place"])
+    fixed = []
+    for item in items:
+        if 'place' in item:
+            place = item['place']
+            if place != "Amsterdam" and "amsterdam" in place.lower():
+                get_collection().update_one({'_id': item['_id']}, {'$set': {'place': 'Amsterdam'}})
+                fixed.append(item)
+
+    return jsonify({"ok": fixed})
 
 if __name__ == '__main__':
     app.run(debug=True)
