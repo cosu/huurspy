@@ -18,17 +18,24 @@
         var maxPrice = options.maxPrice || -1;
         var minPrice = options.minPrice || -1;
         var place = options.place || "";
+        var fields = options.fields || [];
 
         var url = baseURL.replace("PAGESIZE", pageSize).replace("PAGE", page);
 
         if (place.length > 0) {
           url += '&place=' + place;
         }
+
         if (minPrice > 0) {
           url += '&min_price=' + minPrice;
         }
+
         if (maxPrice > 0) {
           url += '&max_price=' + maxPrice;
+        }
+
+        if (fields.length > 0) {
+          url += '&fields=' + fields.join(',');
         }
 
         return $http.get(url).then(function (response) {

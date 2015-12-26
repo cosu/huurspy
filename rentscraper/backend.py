@@ -46,6 +46,7 @@ def ads():
     page = int(request.args.get('page', 1))
     min_price = int(request.args.get('min_price', 0))
     max_price = int(request.args.get('max_price', 999999))
+    fields = request.args.get('fields', '').split(",")
     place = request.args.get('place', "")
 
     query_options = {
@@ -61,7 +62,12 @@ def ads():
 
     skip = (page-1) * page_size
     total = get_collection().find(query_options).count()
-    items = get_collection().find(query_options).sort("scrapy-mongodb.ts",  pymongo.DESCENDING).skip(skip).limit(page_size)
+    if len(fields) > 1:
+        items_cursor = get_collection().find(query_options, fields=fields)
+    else:
+        items_cursor = get_collection().find(query_options)
+
+    items = items_cursor.sort("scrapy-mongodb.ts",  pymongo.DESCENDING).skip(skip).limit(page_size)
     data = {
         "total": total,
         "items": list(items),

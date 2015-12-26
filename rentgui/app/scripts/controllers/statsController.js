@@ -8,7 +8,7 @@
       vm.data = [];
 
       var deferred = $q.defer();
-      var options = {pageSize: 10000, page: 1, minPrice:100, maxPrice: 3000};
+      var options = {pageSize: 10000, page: 1, minPrice: 100, maxPrice: 3000, fields: ["place", "price"]};
 
       dataservice.getPage(options).then(function (data) {
         var pages = data.pages;
@@ -36,7 +36,7 @@
       });
 
 
-      function draw(){
+      function draw() {
         var priceChart = dc.barChart('#price');
         var placeChart = dc.rowChart('#place');
         var ndx = crossfilter(vm.data);
@@ -52,10 +52,8 @@
         });
 
 
-
         var minPrice = priceDimension.bottom(1)[0].price;
         var maxPrice = priceDimension.top(1)[0].price;
-
 
 
         priceChart.width(420)
