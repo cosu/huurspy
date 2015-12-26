@@ -5,7 +5,7 @@ PUSHBULLET_KEY="xxx"
 
 source /home/${U}/.virtualenvs/huurspy/bin/activate
 cd /home/${U}/huurspy
-CITIES="amsterdam amstelveen zandaam hilversum haarlem den-haag leiden"
+CITIES="amsterdam amstelveen zandaam hilversum haarlem den-haag leiden rotterdam delft utrecht"
 spiders=`scrapy  list`
 for city in $CITIES; do
         for spider in $spiders; do
