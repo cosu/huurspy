@@ -7,16 +7,18 @@
       vm.binSize = 100;
       vm.data = [];
 
-      var deferred = $q.defer();
-      var options = {pageSize: 10000, page: 1, minPrice: 100, maxPrice: 3000, fields: ["place", "price"]};
+      var options = {pageSize: 1, page: 1, minPrice: 100, maxPrice: 3000, fields: ["place", "price"]};
+      var pageSize = 10000;
 
-      dataservice.getPage(options).then(function (data) {
-        var pages = data.pages;
-        vm.data = data.items;
-        if (pages >= 2) {
-          vm.receiveCount = pages - 1;
-          for (var i = 2; i < pages + 1; i++) {
-            options.page = i;
+
+      function getData() {
+        var deferred = $q.defer();
+        dataservice.getPage(options).then(function (data) {
+          var pages = Math.ceil(data.total / pageSize);
+          options.pageSize = pageSize;
+          vm.receiveCount = pages;
+          for (var i = 0; i < pages; i++) {
+            options.page = i + 1;
             dataservice.getPage(options).then(function (data) {
               vm.receiveCount--;
               angular.forEach(data.items, function (item) {
@@ -28,12 +30,10 @@
               }
             });
           }
-        }
-        else {
-          deferred.resolve();
-        }
 
-      });
+        });
+        return deferred.promise;
+      }
 
 
       function draw() {
@@ -76,7 +76,7 @@
 
       }
 
-      deferred.promise.then(draw);
+      getData().then(draw);
 
 
     });
