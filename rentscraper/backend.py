@@ -63,7 +63,7 @@ def ads():
     skip = (page-1) * page_size
     total = get_collection().find(query_options).count()
     if len(fields) > 1:
-        items_cursor = get_collection().find(query_options, fields=fields)
+        items_cursor = get_collection().find(query_options, projection=fields)
     else:
         items_cursor = get_collection().find(query_options)
 
